@@ -1,3 +1,14 @@
+/*
+Esta funcion tiene como objetivo hacer la petición  a la api por medio de un fetch()
+y recibir el retorno de la misma, despues de esto, hacer la asignacion del la data al HTML de forma
+que se pueda entender y quede agradable para el usuario.
+value: Guarda la data retornada.
+item: guarda los productos qu vienen en el array.
+cate: Guarda las categorias del array.
+div: Guarda el element HTML donde se va a colocar la data.
+Cuando se hace  el forEach al "item", se hace la asignacion de cada uno de los elementos que van a componer el HTML de cada producto.
+
+*/ 
 function getData(){
     let value;
     fetch('http://127.0.0.1:8000/api/product_category')
@@ -8,9 +19,9 @@ function getData(){
  
         value.forEach(element => {
             let item = element.product;
-            let value = element.category;
+            let cate = element.category;
             div.innerHTML += ('<br>');
-            div.innerHTML += ('<h2><strong>' + value.name.toUpperCase() + '</strong></h2>');
+            div.innerHTML += ('<h2><strong>' + cate.name.toUpperCase() + '</strong></h2>');
             item.forEach(data => {
                 let dateDiv = ('<div style="margin: 30px;" class="card col-sm-3">');
                 data.url_image = data.url_image == null || data.url_image == "" ? "src//assets//img//noimage.jpg":data.url_image;
@@ -32,6 +43,17 @@ function getData(){
         console.log(error);
     });
 }
+
+/*
+Funcion encargada de hacer la asignacion de "." y ",", siendo la primera para valores decimales y 
+la segunda para separar lo miles.
+num: Esta variable recibe el valor a convertir.
+splitStr: Esta variable recibe un array del valor realizado con un split() por medio del "." como separador inicial para los deciamales.
+splitLeft: Recibe la primera parte del array que llevara el valor de miles.
+splitRight: Recibe la segunda parte del array a la cual se le sumara un "." en la parte izquierda de este valor representando el valor decimal.
+regx: Exprecion regular la cual se pasara por medio de un ciclo para haver el valor de miles.
+price: agrupa  splitLeft y splitRight dando como resultado el valor con separacion de miles y descimales.
+*/ 
 function finalFormat(value){
     let num = value; //.toString().replace('.','').replace(',','.');
     num +='';
