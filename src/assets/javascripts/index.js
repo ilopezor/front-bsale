@@ -11,7 +11,7 @@ Cuando se hace  el forEach al "item", se hace la asignacion de cada uno de los e
 */ 
 function getData(){
     let value;
-    fetch('http://127.0.0.1:8000/api/product_category')
+    fetch('https://app-back-bsale.herokuapp.com/api/product_category')
     .then(response => response.json())
     .then(function(data){
         value = data.data;
